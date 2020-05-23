@@ -1,0 +1,20 @@
+{
+  "name": "twitscrapeapi",
+  "version": "1.0.0",
+  "description": "An API that scrapes a given twitter public account to fetch tweets and return useful data",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "Biswaranjan Padhy",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "scrape-twitter": "^0.11.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
