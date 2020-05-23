@@ -4,7 +4,8 @@
   "description": "An API that scrapes a given twitter public account to fetch tweets and return useful data",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "serve-dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "Biswaranjan Padhy",

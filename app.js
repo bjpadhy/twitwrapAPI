@@ -3,8 +3,8 @@ const cors = require('cors');
 const app = express();
 
 //Start the server
-app.listen(3000, () => {
-  console.log("Listening on port 3000");
+app.listen(process.env.PORT || 8080, () => {
+  console.log("Listening...");
 });
 
 //Middlewares
