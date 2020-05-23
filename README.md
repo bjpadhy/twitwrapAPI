@@ -2,7 +2,7 @@
 
 > An API that scrapes a given twitter public account to fetch tweets and return useful data
 
-![Build Status](https://img.shields.io/github/last-commit/bjpadhy/twitscrapeAPI/master)
+![Build Status](https://img.shields.io/github/last-commit/bjpadhy/twitscrapeAPI/development)
 ![License](https://img.shields.io/npm/l/scrape-twitter)
 
 ## Table of Contents (Optional)
