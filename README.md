@@ -6,7 +6,7 @@
 ![Last Commit](https://img.shields.io/github/last-commit/bjpadhy/twitscrapeAPI/master)
 ![License](https://img.shields.io/npm/l/scrape-twitter)
 
-## Table of Contents (Optional)
+## Table of Contents
 
 - [Installation](#installation)
 - [Features](#features)
