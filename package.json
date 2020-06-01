@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "serve-dev": "nodemon app.js"
+    "run-dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "Biswaranjan Padhy",
