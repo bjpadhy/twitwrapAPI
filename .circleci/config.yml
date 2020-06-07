@@ -21,5 +21,4 @@ jobs:
     executor: node
     steps:
       - checkout
-      - run: npm install
-      - run: npm run build
+      - run: npm install --production
