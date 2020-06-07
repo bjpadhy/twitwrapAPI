@@ -28,8 +28,10 @@ router.get('/:query/:type/:count', async (req, res) => {
     console.log('Fetching tweets...');
     let result = new scraper.TweetStream(req.params.query, req.params.type, { count: req.params.count });
     readResult(result).then(data => {
-        res.send(data);
+        res.json(data);
     }).catch(error => {
+        if(!error.response)
+            res.status(500).json(error);
         res.status(error.response.status).send(error.response.statusText);
     });
 });
@@ -61,6 +63,8 @@ router.get('/:query/:type', async (req, res) => {
     readResult(result).then(data => {
         res.send(data);
     }).catch(error => {
+        if(!error.response)
+            res.status(500).json(error);
         res.status(error.response.status).send(error.response.statusText);
     });
 });
