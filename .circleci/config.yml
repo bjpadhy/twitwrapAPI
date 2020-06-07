@@ -1,14 +1,21 @@
 version: 2.1
+orbs:
+  heroku: circleci/heroku@0.0.10.
 executors:
   node:
     docker:
       - image: circleci/node:10
 workflows:
   version: 2
-  build_and_test:
+  build_and_deploy:
     jobs:
       - build
-#      - test
+      - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
 jobs:
   build:
     executor: node
@@ -16,9 +23,3 @@ jobs:
       - checkout
       - run: npm install
       - run: npm run build
-#  test:
-#    executor: node
-#    steps:
-#      - checkout
-#      - run: npm install
-#      - run: npm run test
