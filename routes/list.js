@@ -26,10 +26,13 @@ router.get('/:uid/:list/:count', async (req, res) => {
         return chunks;
     }
     console.log('Fetching tweets...');
-    let result = new scraper.ListStream(req.params.uid, req.params.list, {count: req.params.count});
+
+    var result = new scraper.ListStream(req.params.uid, req.params.list, { count: req.params.count });
     readResult(result).then(data => {
-        res.send(data);
+        res.json(data);
     }).catch(error => {
+        if(!error.response)
+            res.status(500).json(error);
         res.status(error.response.status).send(error.response.statusText);
     });
 });
@@ -59,8 +62,10 @@ router.get('/:uid/:list', async (req, res) => {
     console.log('Fetching tweets...');
     let result = new scraper.ListStream(req.params.uid, req.params.list);
     readResult(result).then(data => {
-        res.send(data);
+        res.json(data);
     }).catch(error => {
+        if(!error.response)
+            res.status(500).json(error);
         res.status(error.response.status).send(error.response.statusText);
     });
 });
