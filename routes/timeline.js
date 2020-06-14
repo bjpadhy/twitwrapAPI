@@ -1,73 +1,70 @@
 //Import Router from express
 const express = require('express');
 const router = express.Router();
-const scraper = require('scrape-twitter');
+const axios = require('axios');
+const crypto = require('crypto');
+const OAuth = require('oauth-1.0a');
+
+const oauth = OAuth({
+    consumer: { key: `${process.env.OAUTH_CONSUMER_KEY}`, secret: `${process.env.OAUTH_CONSUMER_SECRET}` },
+    signature_method: 'HMAC-SHA1',
+    hash_function(base_string, key) {
+        return crypto
+            .createHmac('sha1', key)
+            .update(base_string)
+            .digest('base64')
+    },
+});
+
+const token = {
+    key: `${process.env.OAUTH_TOKEN}`,
+    secret: `${process.env.OAUTH_TOKEN_SECRET}`,
+};
 
 //Get tweets of given username for given count
 router.get('/:username/:count', async (req, res) => {
-    console.log(req.params);
-    async function readResult(stream) {
-        console.log('Reading tweets...');
-        const chunks = [];
-        for await (const chunk of stream) {
-            console.log(chunk);
-            let tempObj = {
-                id: chunk.id,
-                screenName: chunk.screenName,
-                time: chunk.time,
-                text: chunk.text,
-                images: chunk.images,
-                urls: chunk.urls,
-                retweetCount: chunk.retweetCount,
-                favoriteCount: chunk.favoriteCount
-            }
-            chunks.push(tempObj);
+    const request_data = {
+        url: `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${req.params.username}&count=${req.params.count}`,
+        method: 'get'
+    };
+    var config = {
+        method: `${request_data.method}`,
+        url: `${request_data.url}`,
+        headers: {
+            Authorization: oauth.toHeader(oauth.authorize(request_data, token)).Authorization,
+            Cookie: 'lang=en; personalization_id="v1_gFujxRtMBrNGdUudu4BPvw=="; guest_id=v1%3A159216200218154542'
         }
-        console.log('Done');
-        return chunks;
-    }
-    console.log('Fetching tweets...');
-    let result = new scraper.TimelineStream(req.params.username, { count: req.params.count });
-    readResult(result).then(data => {
-        res.json(data);
-    }).catch(error => {
-        if(!error.response)
-            res.status(500).json(error);
-        res.status(error.response.status).send(error.response.statusText);
-    });
+    };
+    axios(config)
+        .then(function (response) {
+            res.send(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+            res.status(error.response.status).send(error);
+        });
 });
 
 //Get all tweets of given username
 router.get('/:username', async (req, res) => {
-    console.log(req.params);
-    async function readResult(stream) {
-        console.log('Reading tweets...');
-        const chunks = [];
-        for await (const chunk of stream) {
-            let tempObj = {
-                id: chunk.id,
-                screenName: chunk.screenName,
-                time: chunk.time,
-                text: chunk.text,
-                images: chunk.images,
-                urls: chunk.urls,
-                retweetCount: chunk.retweetCount,
-                favoriteCount: chunk.favoriteCount
-            }
-            chunks.push(tempObj);
+    const request_data = {
+        url: `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${req.params.username}`,
+        method: 'get'
+    };
+    var config = {
+        method: `${request_data.method}`,
+        url: `${request_data.url}`,
+        headers: {
+            Authorization: oauth.toHeader(oauth.authorize(request_data, token)).Authorization,
+            Cookie: 'lang=en; personalization_id="v1_gFujxRtMBrNGdUudu4BPvw=="; guest_id=v1%3A159216200218154542'
         }
-        console.log('Done');
-        return chunks;
-    }
-    console.log('Fetching tweets...');
-    let result = new scraper.TimelineStream(req.params.username);
-    readResult(result).then(data => {
-        res.json(data);
-    }).catch(error => {
-        if(!error.response)
-            res.status(500).json(error);
-        res.status(error.response.status).send(error.response.statusText);
-    });
+    };
+    axios(config)
+        .then(function (response) {
+            res.send(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+            res.status(error.response.status).send(error);
+        });
 });
 
 //Export to be used as middleware
