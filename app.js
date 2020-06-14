@@ -3,6 +3,8 @@ const cors = require('cors');
 const app = express();
 const compression = require('compression');
 const helmet = require('helmet');
+require('dotenv').config();
+
 //Start the server
 app.listen(process.env.PORT || 8080, () => {
   console.log("Listening...");
