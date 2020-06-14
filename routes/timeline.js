@@ -60,10 +60,12 @@ router.get('/:username', async (req, res) => {
     };
     axios(config)
         .then(function (response) {
-            res.send(JSON.stringify(response.data));
+            console.log(JSON.stringify(response.data));
+            //res.send(JSON.stringify(response.data));
         })
         .catch(function (error) {
-            res.status(error.response.status).send(error);
+            console.log(error);
+            //res.status(error.response.status).send(error);
         });
 });
 
