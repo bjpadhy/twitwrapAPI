@@ -24,13 +24,14 @@ const token = {
 //Get tweets of given username for given count
 router.get('/:username/:count', async (req, res) => {
     const request_data = {
-        url: `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${req.params.username}&count=${req.params.count}`,
-        method: 'get'
+        url: `/1.1/statuses/user_timeline.json?screen_name=${req.params.username}&count=${req.params.count}`,
+        method: 'GET'
     };
     var config = {
         method: `${request_data.method}`,
         url: `${request_data.url}`,
         headers: {
+            Host: 'api.twitter.com',
             Authorization: oauth.toHeader(oauth.authorize(request_data, token)).Authorization,
             Cookie: 'lang=en; personalization_id="v1_gFujxRtMBrNGdUudu4BPvw=="; guest_id=v1%3A159216200218154542'
         }
@@ -40,20 +41,22 @@ router.get('/:username/:count', async (req, res) => {
             res.send(JSON.stringify(response.data));
         })
         .catch(function (error) {
-            res.status(error.response.status).send(error);
+            console.log(error);
+            //res.status(400).send(error);
         });
 });
 
 //Get all tweets of given username
 router.get('/:username', async (req, res) => {
     const request_data = {
-        url: `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${req.params.username}`,
-        method: 'get'
+        url: `/1.1/statuses/user_timeline.json?screen_name=${req.params.username}`,
+        method: 'GET'
     };
     var config = {
         method: `${request_data.method}`,
         url: `${request_data.url}`,
         headers: {
+            Host: 'api.twitter.com',
             Authorization: oauth.toHeader(oauth.authorize(request_data, token)).Authorization,
             Cookie: 'lang=en; personalization_id="v1_gFujxRtMBrNGdUudu4BPvw=="; guest_id=v1%3A159216200218154542'
         }
@@ -63,7 +66,8 @@ router.get('/:username', async (req, res) => {
             res.send(JSON.stringify(response.data));
         })
         .catch(function (error) {
-            res.status(error.response.status).send(error);
+            console.log(error);
+            //res.status(400).send(error);
         });
 });
 
