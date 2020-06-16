@@ -1,6 +1,7 @@
 # twitscrapeAPI
 
-> An API that scrapes a given twitter public account to fetch tweets and return useful data
+> A REST API that handles OAuth authentication and request mechanisms for the twitter API to fetch information of a public account and return the requested data
+
 
 ![Build Status](https://img.shields.io/github/workflow/status/bjpadhy/twitscrapeAPI/Node.js%20CI/master)
 ![Last Commit](https://img.shields.io/github/last-commit/bjpadhy/twitscrapeAPI/master)
@@ -37,7 +38,7 @@ $ npm update
 
 ## Features
 
-- Get Twitter data without being required to configure an API key.
+- Get Twitter data without being required to configure an API key or authentication headers.
 - Deploy and use as with any REST client to consume in frontend projects.
 - Get timelines, query results and public lists.
 
