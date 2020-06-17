@@ -6,8 +6,9 @@ const helmet = require('helmet');
 require('dotenv').config();
 
 //Start the server
-app.listen(process.env.PORT || 8080, () => {
-  console.log("Listening...");
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Listening on ${PORT}`);
 });
 
 //Middlewares
@@ -19,8 +20,8 @@ app.use(express.json());
 
 //Import Routes
 const listRoute = require('./routes/list');
-const queryRoute = require('./routes/query');
+const searchRoute = require('./routes/search');
 const timelineRoute = require('./routes/timeline');
-app.use('/api/by-list/', listRoute);
-app.use('/api/by-query/', queryRoute);
+app.use('/api/list/', listRoute);
+app.use('/api/search/', searchRoute);
 app.use('/api/timeline/', timelineRoute);

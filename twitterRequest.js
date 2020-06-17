@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const OAuth = require('oauth-1.0a');
 
-//Create OAuth1.0a Headers
+//Create OAuth1.0a Token
 class Oauth {
     constructor() {
         this.oauth = OAuth({
@@ -21,23 +21,37 @@ class Oauth {
     }
 }
 
-//Create Timeline Request
-function timelineRequest(username, count = 50) {
+//Create OAuth Headers
+function oAuthHeader(config) {
     const oauth = new Oauth;
-    const request_data = {
-        method: 'GET',
-        url: `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${username}&count=${count}`,
-    };
     return {
-        method: `${request_data.method}`,
-        url: `${request_data.url}`,
+        method: `${config.method}`,
+        url: `${config.url}`,
         headers: {
             Host: 'api.twitter.com',
-            Authorization: oauth.oauth.toHeader(oauth.oauth.authorize(request_data, oauth.token)).Authorization,
+            Authorization: oauth.oauth.toHeader(oauth.oauth.authorize(config, oauth.token)).Authorization,
             Cookie: 'lang=en; personalization_id="v1_gFujxRtMBrNGdUudu4BPvw=="; guest_id=v1%3A159216200218154542'
         }
     };
+}
+
+//Create Timeline Request
+function timelineRequest(username, count = 50) {
+    const config = {
+        method: 'GET',
+        url: `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${username}&count=${count}`,
+    };
+    return oAuthHeader(config);
 };
+
+//Create List Request
+function listRequest(username, slug, retweets = true, entities = true, count = 50) {
+    const config = {
+        method: 'GET',
+        url: `https://api.twitter.com/1.1/lists/statuses.json?owner_screen_name=${username}&slug=${slug}&include_entities=${entities}&include_rts=${retweets}&count=${count}`
+    };
+    return oAuthHeader(config);
+}
 
 //Create Error Object
 function errorObject(error) {
@@ -51,4 +65,4 @@ function errorObject(error) {
     };
 };
 
-module.exports = { createRequest: timelineRequest, errorObject: errorObject };
+module.exports = { createRequest: { timelineRequest: timelineRequest, listRequest: listRequest }, errorObject: errorObject };
