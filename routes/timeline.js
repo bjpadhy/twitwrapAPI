@@ -6,7 +6,7 @@ const twitter = require('../twitterRequest');
 
 //Get tweets of given username for given optional count
 router.get('/:username/:count?', async (req, res) => {
-    const config = twitter.createRequest(req.params.username, req.query.count);
+    const config = twitter.createRequest.timelineRequest(req.params.username, req.query.count);
     axios(config)
         .then(function (response) {
             res.json(response.data);

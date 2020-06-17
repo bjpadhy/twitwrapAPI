@@ -54,21 +54,21 @@ $ npm run start
 > Optional query parameter: count – Number to limit results(default: 50)
 ```shell
 http://localhost:3000/api/timeline/<username>
-http://localhost:3000/api/timeline/<username>/?count=<number>
+http://localhost:3000/api/timeline/<username>?count=<number>
 ```
 
 > Get List
 > Optional query parameters: retweets - true/false(default: true), entities – Tweet metadata - true/false(default: true), count(default: 50)
 ```shell
 http://localhost:3000/api/list/<username>/<listname>
-http://localhost:3000/api/list/<username>/<listname>/?retweets=false&entities=false&count=<number>
+http://localhost:3000/api/list/<username>/<listname>?retweets=false&entities=false&count=<number>
 ```
 
 > Get Search Result
 > Optional query parameters: type – top/latest(default: latest), count(default: 50)
 ```shell
 http://localhost:3000/api/search/<search_term>
-http://localhost:3000/api/search/<search_term>/?type=top&count=<number>
+http://localhost:3000/api/search/<search_term>?type=top&count=<number>
 ```
 
 
