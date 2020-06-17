@@ -1,4 +1,4 @@
-# twitscrapeAPI
+# twitwrapAPI
 
 > A REST API that handles OAuth authentication and request mechanisms for the twitter API to fetch information of a public account and return the requested data
 
@@ -40,7 +40,7 @@ $ npm update
 
 - Get Twitter data without being required to configure an API key or authentication headers.
 - Deploy and use as with any REST client to consume in frontend projects.
-- Get timelines, query results and public lists.
+- Get timelines, search results and public lists.
 
 
 ## Usage
@@ -51,23 +51,30 @@ $ npm run start
 ```
 
 > Get Timeline
+>> Optional query parameter: count – Number to limit results(default: 50)
 ```shell
-http://localhost:3000/api/timeline/<username>/<limitresults>(optional)
+http://localhost:8080/api/timeline/<username>
+http://localhost:8080/api/timeline/<username>/?count=<number>
 ```
-> Get list
+
+> Get List
+>> Optional query parameters: retweets - true/false(default: true), entities – Tweet metadata - true/false(default: true), count(default: 50)
 ```shell
-http://localhost:3000/api/by-list/<username>/<listname>/<limitresults>(optional)
+http://localhost:8080/api/list/<username>/<listname>
+http://localhost:8080/api/list/<username>/<listname>/?retweets=false&entities=false&count=<number>
 ```
-> Get query result
-- type: top or latest
+
+> Get Search Result
+>> Optional query parameters: type – top/latest(default: latest), count(default: 50)
 ```shell
-http://localhost:3000/api/by-query/<query>/<type>/<limitresults>(optional)
+http://localhost:8080/api/search/<search_term>
+http://localhost:8080/api/search/<search_term>/?type=top&count=<number>
 ```
 
 
 ## Support
 
-Reach out to me at one of the following places!
+Reach out to me here!
 
 - Twitter at <a href="https://twitter.com/bjpadhy" target="_blank">`@bjpadhy`</a>
 
