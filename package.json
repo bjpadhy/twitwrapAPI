@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "run-dev": "nodemon app.js"
+    "run-dev": "nodemon app.js",
+    "lint": "eslint --fix '**/*.js'"
   },
   "keywords": [],
   "author": "Biswaranjan Padhy",
@@ -21,6 +22,7 @@
     "scrape-twitter": "^0.11.1"
   },
   "devDependencies": {
+    "eslint": "^7.3.1",
     "nodemon": "^2.0.4"
   }
 }
