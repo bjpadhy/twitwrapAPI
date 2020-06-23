@@ -4,6 +4,7 @@
 
 
 ![Build Status](https://img.shields.io/github/workflow/status/bjpadhy/twitscrapeAPI/Node.js%20CI/master)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/7e4101843e4745a8b1bfcb4ded7270f9)](https://www.codacy.com/manual/padhybiswaranjan/twitscrapeAPI?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=bjpadhy/twitscrapeAPI&amp;utm_campaign=Badge_Grade)
 ![Last Commit](https://img.shields.io/github/last-commit/bjpadhy/twitscrapeAPI/master)
 ![License](https://img.shields.io/npm/l/scrape-twitter)
 
